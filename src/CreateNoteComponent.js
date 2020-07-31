@@ -15,7 +15,7 @@ const CreateNoteComponent = (props) => {
         value={newNoteText}
         onChangeText={(currentText) => setNewNoteText(currentText)}
         />
-        <Button 
+        <Button style={styles.buttonsytle}
             title={"Create Note"}
             onPress={() => {
                 props.onCreateButtonPress(newNoteText)
@@ -32,8 +32,14 @@ const styles = StyleSheet.create({
         width: 320,
         height: 140,
         borderRadius: 10,
-        padding: 15
-    }
+        padding: 15,
+        margin:10
+    },
+    buttonsytle:{
+        padding:10,
+        margin:10
+    },
+    
 });
 
 export default CreateNoteComponent;
