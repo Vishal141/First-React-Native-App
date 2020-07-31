@@ -10,14 +10,13 @@ export default function App() {
   
   if(firebase.apps.length === 0){
     var firebaseConfig = {
-    apiKey: "AIzaSyBKr3_-KkxEsq-SeBkyZVV4EURG7P4OktQ",
-    authDomain: "myfirstrnapp-d3dbc.firebaseapp.com",
-    databaseURL: "https://myfirstrnapp-d3dbc.firebaseio.com",
-    projectId: "myfirstrnapp-d3dbc",
-    storageBucket: "myfirstrnapp-d3dbc.appspot.com",
-    messagingSenderId: "335408932857",
-    appId: "1:335408932857:web:e1e3f39a731c3d9ed0ff28"
-
+      apiKey: "AIzaSyBKr3_-KkxEsq-SeBkyZVV4EURG7P4OktQ",
+      authDomain: "myfirstrnapp-d3dbc.firebaseapp.com",
+      databaseURL: "https://myfirstrnapp-d3dbc.firebaseio.com",
+      projectId: "myfirstrnapp-d3dbc",
+      storageBucket: "myfirstrnapp-d3dbc.appspot.com",
+      messagingSenderId: "335408932857",
+      appId: "1:335408932857:web:e1e3f39a731c3d9ed0ff28"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, TextInput, Button,ImageBackground} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Button,ImageBackground,Alert} from 'react-native';
 import firebase from 'firebase';
+
 
 const image = { uri: 'https://cdn.pixabay.com/photo/2019/02/14/15/01/easter-3996763__340.jpg' };
 
@@ -33,7 +34,9 @@ const LoginScreenComponent = () => {
         <View style={styles.buttonStyle}>
         <Button  
             title={"Log In"}
-            onPress={() => firebase.auth().signInWithEmailAndPassword(email, password)}
+            onPress={() => firebase.auth().signInWithEmailAndPassword(email, password).catch(()=>{
+                Alert.alert('Oops!','please enter valid email or password')
+            })}
         />
         </View>
         
@@ -49,7 +52,8 @@ const LoginScreenComponent = () => {
                     setPassword("")
                 })
                 .catch(() => {
-                    console.log("Some error happened")
+                   // console.log("Some error happened")
+                   Alert.alert('failed','invalid email or password')
                 })
                 }
             }

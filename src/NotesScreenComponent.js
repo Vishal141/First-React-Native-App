@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import  {Text, FlatList, View, StyleSheet, TextInput, Button}  from 'react-native';
 import SingleNoteSummaryComponent from './SingleNoteSummaryComponent';
 import CreateNoteComponent from './CreateNoteComponent';
 import firebase from 'firebase'
+import _ from 'lodash'
 // a react component is nothing but a javascript function
 
 const NotesScreenComponent = () => {
@@ -21,6 +22,31 @@ const NotesScreenComponent = () => {
     // to write javascript inside jsx, i need to enclose javascript code in {}
     // {name: 'abc', 'age': 12} -> {name} -> {name: 'abc'}
     // item , index
+
+    // /users/{id}/ 
+
+    const loggedInUserId = firebase.auth().currentUser.uid
+    
+    useEffect(() => {firebase.database()
+        .ref(`/users/${loggedInUserId}/`)
+        .on('value', (completeNewData) => {
+            console.log(completeNewData)
+
+            const newDataList = _.map(completeNewData.val(), (value, key) => {
+                console.log("Value", value)
+                console.log("Key", key)
+                return {...value}
+            })
+
+            console.log(newDataList)
+            setData(newDataList.reverse())
+        }
+    )}, [])
+
+
+
+
+
 
     const addNewNote = (text) => {
         if(text.length > 0){
@@ -73,8 +99,6 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     textViewStyle: {
-        height: 150,
-        width: 150,
         margin: 10,
         borderRadius: 10,
         padding: 5,
@@ -96,29 +120,3 @@ const randomBackground = () => {
 }
 
 export default NotesScreenComponent;
-
-
-// ['rgb(1,2,3)', ]
-// Choose random element from list in js
-
-// Javascript object JSON - JavaScript Object Notation
-
-
-// {
-//     'name': 'Naman',
-//     'age': 'blah',
-//     'hobby': 'meh',
-//     'friends': [
-//         "A", "B", "C"
-//     ],
-//     'scbool' : {
-//         'name': 'BHS',
-//         'location': 'Rajasthan'
-//     },
-//     'fav_city': 'abc'
-
-// }
-
-
-
-// If we have to write JS in JSX, we need to surround JS code in {}
